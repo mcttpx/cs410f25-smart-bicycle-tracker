@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import time
 import sqlite3
@@ -9,6 +9,14 @@ from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
+
+# ---------------------------------------
+# UI route: serve the dashboard page
+# ---------------------------------------
+@app.route("/")
+def dashboard():
+    # Serve dashboard.html from the same directory as backend.py
+    return send_from_directory(".", "dashboard.html")
 
 # -----------------------------
 # Motion / lock state (in-memory)
